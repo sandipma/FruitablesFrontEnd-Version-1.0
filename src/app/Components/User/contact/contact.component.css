@@ -1,0 +1,15 @@
+/* Contact Component CSS Code Start */
+
+.contact-background {
+    background-image: url("../../../../assets/Contact-2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 600px;
+    background-size: 100% 100%;
+}
+
+.bg-background {
+    color: #ffb524 !important;
+}
+
+/* Contact Component CSS Code End */

@@ -1,0 +1,145 @@
+<!--Login Component UI Code Start-->
+
+<div class="container">
+    <section class="d-flex align-items-center" style="background-color: rgb(230, 164, 83);">
+        <div class="container py-3">
+            <div class="row justify-content-center align-items-center h-100 mt-5">
+                <div class="col-12 col-md-6">
+                    <div class="card rounded-3">
+                        <img src="assets/29854.jpg" class="card-img-top w-100 mt-5"
+                            style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <h3 class="text-center mb-4">Log in to continue.....</h3>
+                            <div class="spinner-container" *ngIf="isLoading || this.authService.isgoogleLoading">
+                                <div class="spinner-grow text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-secondary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-success" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-danger" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-warning" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-info" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-success" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-dark" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <form *ngIf="(!isLoading  && this.commonService.isUserOrAdmin === 'admin')"
+                                [formGroup]="adminLoginForm" class="w-75" (ngSubmit)="onSubmit()" novalidate
+                                autocomplete="off">
+                                <div class="form-group mt-3">
+                                    <input type="text" formControlName="AdminName" id="AdminName"
+                                        class="form-control form-control-lg" placeholder="Admin Name"
+                                        [ngClass]="{ 'is-invalid': (!submitted && f['AdminName'].dirty) && f['AdminName'].errors, 'is-valid': !submitted && f['AdminName'].valid }"
+                                        required>
+                                    <div *ngIf="!submitted && f['AdminName'].dirty && f['AdminName'].errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f['AdminName'].errors['required']"> Admin Name is required! </div>
+                                        <div
+                                            *ngIf="f['AdminName'].errors['minlength'] || f['AdminName'].errors['maxlength']">
+                                            Admin Name must be between 5-20 characters long </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <input type="password" formControlName="Password"
+                                        class="form-control form-control-lg" name="Password" placeholder="Password"
+                                        [ngClass]="{ 'is-valid': (!submitted && f['Password'].dirty) && passwordValid, 'is-invalid': (!submitted && f['Password'].dirty) && !passwordValid }" />
+                                    <div class="invalid-feedback">
+                                        <span class="text-danger"
+                                            *ngIf="(!submitted && f['Password'].dirty) && !requiredValid">Password is
+                                            required</span>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-5 mb-2 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-3"
+                                        [disabled]="isWorking || !adminLoginForm.valid">
+                                        <i [attr.class]="isWorking ? 'bi-hourglass-split' : 'bi-check2-square'"></i> {{
+                                        isWorking ? 'Working on it...' : 'Submit' }}
+                                    </button>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" (click)="onForgotPasswordClick()" class="btn btn-link">Forgot
+                                        Password?</button>
+                                </div>
+                                <div class="text-center">
+                                    <p> or </p>
+                                    <button class="btn btn-primary" (click)="onOTPClick()"> Login with OTP</button>
+                                </div>
+                            </form>
+                            <form
+                                *ngIf="(!isLoading  && !this.authService.isgoogleLoading) && this.commonService.isUserOrAdmin === 'user'"
+                                [formGroup]="userLoginForm" class="w-75" (ngSubmit)="onSubmit()" novalidate
+                                autocomplete="off">
+                                <div class="form-group mt-3">
+                                    <input type="text" formControlName="UserName" id="UserName"
+                                        class="form-control form-control-lg" placeholder="User Name"
+                                        [ngClass]="{ 'is-invalid': (!submitted && f['UserName'].dirty) && f['UserName'].errors, 'is-valid': !submitted && f['UserName'].valid }"
+                                        required>
+                                    <div *ngIf="!submitted && f['UserName'].dirty && f['UserName'].errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f['UserName'].errors['required']"> User Name is required! </div>
+                                        <div
+                                            *ngIf="f['UserName'].errors['minlength'] || f['UserName'].errors['maxlength']">
+                                            User Name must be between 5-20 characters long </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <input type="password" formControlName="Password"
+                                        class="form-control form-control-lg" name="Password" placeholder="Password"
+                                        [ngClass]="{ 'is-valid': (!submitted && f['Password'].dirty) && passwordValid, 'is-invalid': (!submitted && f['Password'].dirty) && !passwordValid }" />
+                                    <div class="invalid-feedback">
+                                        <span class="text-danger"
+                                            *ngIf="(!submitted && f['Password'].dirty) && !requiredValid">Password is
+                                            required</span>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-5  text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-3"
+                                        [disabled]="isWorking || !userLoginForm.valid">
+                                        <i [attr.class]="isWorking ? 'bi-hourglass-split' : 'bi-check2-square'"></i> {{
+                                        isWorking ? 'Working on it...' : 'Submit' }}
+                                    </button>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" (click)="onForgotPasswordClick()" class="btn btn-link">Forgot
+                                        Password?</button>
+                                </div>
+                                <div class="text-center">
+                                    <p> or </p>
+                                    <asl-google-signin-button class="center-button" (click)="onGoogleLogin()"
+                                        type="standard" size="medium"></asl-google-signin-button>
+                                </div>
+                                <div class="text-center">
+                                    <p> or </p>
+                                    <button class="btn btn-primary" (click)="onOTPClick()"> Login with OTP</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div *ngIf="commonService.isUserOrAdmin === 'admin'" class="container mt-3">
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <button routerLink="/admin-portal" class="btn background"> <i class="fas fa-arrow-left"></i> back to
+                    dashboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Login Component UI Code End-->

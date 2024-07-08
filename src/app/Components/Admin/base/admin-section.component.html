@@ -1,0 +1,123 @@
+<!--Admin Section Component UI Code Start-->
+
+<div class="container-fluid fixed-top">
+    <div class="container topbar bgprimary d-none d-lg-block">
+        <div class="d-flex justify-content-between">
+            <div class="top-info ps-2">
+                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i>
+                    <a class="text-white">Pimpri Chichwad-Pune, India</a>
+                </small>
+                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a
+                        href="mailto:webmaster@example.com" class="text-white">fruitstoremarket@gmail.com</a></small>
+            </div>
+        </div>
+    </div>
+    <div class="container px-0">
+        <nav class="navbar navbar-light bg-white navbar-expand-xl">
+            <a href="admin-portal" class="navbar-brand">
+                <h1 class="text-primary display-6">Fruitables</h1>
+            </a>
+            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
+                data-bs-target="#adminNavbarCollapse">
+                <span class="fa fa-bars text-primary"></span>
+            </button>
+            <div class="collapse navbar-collapse bg-white" id="adminNavbarCollapse">
+                <div class="container mt-2 mb-2">
+                    <div class="d-flex  justify-content-end">
+                        <button type="button"
+                            *ngIf="(!authService.isAdminTokenExists() && !authService.isAdminRefreshTokenExists())"
+                            routerLink="/admin-portal/register" (click)="closeNavbar()"
+                            class="btn btn-warning me-2">Register</button>
+                        <a class="my-auto ms-3 me-3">
+                            <i class="fas fa-user fa-2x"></i>
+                        </a>
+                        <button type="button" class="ms-3"
+                            *ngIf="(!authService.isAdminTokenExists() && !authService.isAdminRefreshTokenExists())"
+                            routerLink="/admin-portal/login" (click)="closeNavbar()"
+                             class="btn btn-warning">Login</button>
+                        <div *ngIf="(authService.isAdminTokenExists() || authService.isAdminRefreshTokenExists())"
+                            class="top-link pe-2">
+                            <small class=""><i class="fas text-secondary"></i> <a
+                                    class="text-dark">Hii....{{authService.loggedInUserName
+                                    }}</a></small>
+                        </div>
+                        <button type="button"
+                            *ngIf="(authService.isAdminTokenExists() || authService.isAdminRefreshTokenExists())"
+                            (click)="authService.logout()" (click)="closeNavbar()"
+                             class="btn btn-warning">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
+
+<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+    <div class="container py-5">
+        <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <a href="#">
+                        <h1 class="text-primary mb-0">Fruitables</h1>
+                        <p class="text-secondary mb-0">Fresh products</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-item">
+                    <p class="mb-4">
+                        For assistance, please contact our support team at <a href="mailto:webmaster@example.com"
+                            class="text-primary">fruitstoremarket@gmail.com</a>
+                        For more information, visit our Website pages.
+                        Manage site content, user accounts, and orders efficiently through this admin panel.
+                        Stay updated with our latest guidelines and policies to ensure smooth operation and compliance.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div *ngIf="this.authService.isAdminTokenExists() || this.authService.isAdminRefreshTokenExists()"
+                    class="d-flex flex-column text-center footer-item">
+                    <h4 class="text-light mb-3">Account</h4>
+                    <a class="btn-link" routerLink="/admin-portal/product-list">Products</a>
+                    <a class="btn-link" routerLink="/admin-portal/admin-orders">Orders</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-item">
+                    <h4 class="text-light mb-3">Contact</h4>
+                    <p>Address: Fruitables marketing - pune </p>
+                    <p>Email: fruitstoremarket@gmail.com</p>
+                    <p>Phone: +91 9527940268</p>
+                    <p>Payment Accepted</p>
+                    <img src="assets/payment.png" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid copyright bg-dark py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <span class="text-light"><a routerLink="/admin-portal"><i
+                            class="fas fa-copyright text-light me-2"></i>www.fruitables.com</a>,
+                    All right reserved.</span>
+            </div>
+            <div class="col-md-6 my-auto text-center text-md-end text-white">
+                Designed By <a class="border-bottom">Sandip Mane</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a (click)="commonService.scrollToTop()" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+        class="fa fa-arrow-up"></i></a>
+
+<!--Admin Section Component UI Code End-->

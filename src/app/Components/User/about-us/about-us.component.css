@@ -1,0 +1,28 @@
+/* About Us Component CSS Code Start */
+
+.aboutus {
+    background-image: url("../../../../assets/ww.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 650px;
+    background-size: 100% 100%;
+}
+
+.bg-all {
+    background-color: #dc8138 !important;
+}
+
+.bg-vegetables {
+    background-color: #81c408 !important;
+}
+
+.bg-fruits {
+    background-color: #f63838 !important;
+}
+
+.custom-dropdown select {
+    background-color: #81c408;
+
+}
+
+/* About Us Component CSS Code End */

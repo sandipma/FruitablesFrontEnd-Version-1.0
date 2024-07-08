@@ -1,0 +1,29 @@
+/* Category List Component CSS Code Start */
+
+.pricustum {
+    color: rgb(34, 208, 72) !important;
+}
+
+.background {
+    background-color: #ffc107 !important;
+
+}
+
+@media (min-width: 992px) {
+    .catlist-header {
+        margin-top: 145px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .catlist-header {
+        margin-top: 110px !important;
+    }
+}
+
+.catlists-header {
+    background-color: #81c408;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* Category List Component CSS Code End */

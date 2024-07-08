@@ -1,0 +1,284 @@
+/* Admin Order Component CSS Code Start */
+
+.orders-header {
+  background-color: #81c408;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+@media (min-width: 992px) {
+  .order-header {
+    margin-top: 145px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .order-header {
+    margin-top: 95px !important;
+  }
+}
+
+body {
+  letter-spacing: 0.8px;
+  background: linear-gradient(0deg, #fff, 50%, #74a0ff);
+  background-repeat: no-repeat;
+}
+
+.container-fluid {
+  margin-top: 80px !important;
+  margin-bottom: 80px !important;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none !important;
+  color: #651FFF !important;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.small {
+  font-size: 12px !important;
+  letter-spacing: 0.5px !important;
+}
+
+.Today {
+  color: rgb(83, 83, 83);
+}
+
+.btn-outline-primary {
+  background-color: #fff !important;
+  color: #4bb8a9 !important;
+  border: 1.3px solid #4bb8a9;
+  font-size: 12px;
+  border-radius: 0.4em !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4bb8a9 !important;
+  color: #fff !important;
+  border: 1.3px solid #4bb8a9;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #42A5F5 !important;
+}
+
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  color: #455a64;
+  padding-left: 0px;
+  margin-top: 30px
+}
+
+#progressbar li {
+  list-style-type: none;
+  font-size: 13px;
+  width: 33.33%;
+  float: left;
+  position: relative;
+  font-weight: 400;
+  color: #455a64 !important;
+}
+
+#progressbar #step1:before {
+  content: "1";
+  color: #fff;
+  width: 29px;
+  margin-left: 15px !important;
+  padding-left: 11px !important;
+}
+
+#progressbar #step2:before {
+  content: "2";
+  color: #fff;
+  width: 29px;
+}
+
+#progressbar #step3:before {
+  content: "3";
+  color: #fff;
+  width: 29px;
+  margin-right: 15px !important;
+  padding-right: 11px !important;
+}
+
+#progressbar li:before {
+  line-height: 29px;
+  display: block;
+  font-size: 12px;
+  background: #455a64;
+  border-radius: 50%;
+  margin: auto;
+}
+
+#progressbar li:after {
+  content: '';
+  width: 121%;
+  height: 2px;
+  background: #455a64;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 15px;
+  z-index: -1;
+}
+
+#progressbar li:nth-child(2):after {
+  left: 50%;
+}
+
+#progressbar li:nth-child(1):after {
+  left: 25%;
+  width: 121%;
+}
+
+#progressbar li:nth-child(3):after {
+  left: 25% !important;
+  width: 50% !important;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #4bb8a9;
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
+  z-index: 0;
+}
+
+small {
+  font-size: 12px !important;
+}
+
+.a {
+  justify-content: space-between !important;
+}
+
+.border-line {
+  border-right: 1px solid rgb(226, 206, 226)
+}
+
+.card-footer img {
+  opacity: 0.3;
+}
+
+.card-footer h5 {
+  font-size: 1.1em;
+  color: #8C9EFF;
+  cursor: pointer;
+}
+
+.orders-header {
+  background-color: #81c408;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #cd9cf2;
+
+  padding: 30px;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))
+}
+
+@media (min-width: 992px) {
+  .order-header {
+    margin-top: 145px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .order-header {
+    margin-top: 102px !important;
+  }
+}
+
+.custom-dot-placed {
+  font-size: 40px;
+  /* Increase size */
+  color: purple;
+  /* Change color */
+  vertical-align: middle;
+  /* Align vertically */
+}
+
+.custom-dot-shipped {
+  font-size: 40px;
+  /* Increase size */
+  color: blue;
+  /* Change color */
+  vertical-align: middle;
+  /* Align vertically */
+}
+
+.custom-dot-out-for-delivery {
+  font-size: 40px;
+  /* Increase size */
+  color: #ffc107;
+  /* Change color */
+  vertical-align: middle;
+  /* Align vertically */
+}
+
+.custom-dot-delivered {
+  font-size: 40px;
+  /* Increase size */
+  color: green;
+  /* Change color */
+  vertical-align: middle;
+  /* Align vertically */
+}
+
+.custom-dot-cancelled {
+  font-size: 40px;
+  /* Increase size */
+  color: red;
+  /* Change color */
+  vertical-align: middle;
+  /* Align vertically */
+}
+
+/* Style for the container */
+.status-container {
+  display: inline-block;
+  /* Ensure inline alignment */
+  margin-bottom: 10px;
+  /* Adjust margin as needed */
+}
+
+a.cancel-order {
+  color: #81c408 !important;
+}
+
+.status {
+  background-color: #81c408 !important;
+}
+
+.background {
+  background-color: #ffc107 !important;
+}
+
+
+/* Admin Order Component CSS Code End */

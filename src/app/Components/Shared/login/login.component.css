@@ -1,0 +1,19 @@
+/* Login Component CSS Code Start */
+
+@media (min-width: 1025px) {
+  .h-custom {
+    min-height: 100vh !important;
+  }
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  background-color: #81c408 !important;
+}
+
+/* Login Component CSS Code End */

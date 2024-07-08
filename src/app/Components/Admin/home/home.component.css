@@ -1,0 +1,60 @@
+/* Admin Home Component CSS Code Start */
+
+.button-container {
+    text-align: center;
+    /* Center the buttons */
+}
+
+.button-container button {
+    display: inline-block;
+    margin: 10px;
+    /* Add margin around each button */
+    padding: 10px 20px;
+    /* Add padding inside each button */
+    font-size: 16px;
+    /* Set the font size */
+    border: none;
+    /* Remove the border */
+    background-color: #007bff;
+    /* Set the background color */
+    color: #fff;
+    /* Set the text color */
+    cursor: pointer;
+    /* Add cursor pointer */
+    transition: background-color 0.3s;
+    /* Add transition for hover effect */
+}
+
+.button-container button:hover {
+    background-color: #0056b3;
+    /* Change background color on hover */
+}
+
+@media (max-width: 768px) {
+    .button-container button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        /* Adjust margin for smaller screens */
+    }
+}
+
+@media (min-width: 992px) {
+    .admin-home-header {
+        margin-top: 145px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .admin-home-header {
+        margin-top: 145px !important;
+    }
+}
+
+.admin-homes-header {
+    background-color: #81c408;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* Admin Home Component CSS Code End */

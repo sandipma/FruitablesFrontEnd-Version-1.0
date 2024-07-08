@@ -1,0 +1,201 @@
+<!--Shop Component UI Code Start-->
+
+<div class="container shop-header">
+    <h1 class="text-center text-dark display-6"><span class="shops-header">Fruit Store</span></h1>
+</div>
+
+<div class="container-fluid fruite">
+    <div class="container py-5">
+        <h1 class="mb-4">Search Fruit & Vegetables</h1>
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <div class="row g-4">
+                    <div class="col-xl-3">
+                        <div class="input-group w-100 mx-auto d-flex">
+                            <div class="input-group rounded">
+                                <input type="search" class="form-control rounded" [(ngModel)]="searchBar"
+                                    placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                <a href="" (click)="onSearch($event)"><span class="input-group-text border-0 mt-2"
+                                        id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6"></div>
+                    <div class="col-xl-3">
+                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                            <label for="fruitables">Sort By:</label>
+                            <select id="fruitables" name="fruitlist" class="border-0 form-select-sm bg-light me-3"
+                                form="fruitform" (change)="onSortChange($event)"
+                                [(ngModel)]="this.shopService.sortValue">
+                                <option value="Popularity">Popularity</option>
+                                <option value="Price-Low to High">Price-Low to High</option>
+                                <option value="Price-High to Low">Price-High to Low</option>
+                                <option value="Newest First">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-lg-3">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <h4>Categories</h4>
+                                    <ul class="list-unstyled fruite-categorie"
+                                        *ngFor="let catWithProductCount of catWithProductCountDetailsList ; let i = index">
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href=""
+                                                    [ngStyle]="{'color': selectedFruitIndex === i ? '#ffb524' : ''}"
+                                                    (click)="onCategoryClick(i,$event,catWithProductCount.categoryName)">
+                                                    <i class="fas fa-apple-alt me-2"></i> {{
+                                                    catWithProductCount.categoryName }}
+                                                </a>
+                                                <span>{{catWithProductCount.productCount }}</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <h4 class="mb-2">Price</h4>
+                                    {{this.shopService.priceValue}}
+                                    <input type="range" class="form-range customRange" min="0" max="500"
+                                        [(ngModel)]="this.shopService.priceValue" (input)="onPriceRangeChange($event)">
+                                    <div class="d-flex justify-content-between">
+                                        <span>0</span>
+                                        <span>500</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5 mb-5">
+                                <div class="position-relative">
+                                    <img src="assets/banner-1.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <div class="position-absolute"
+                                        style="top: 50%; transform: translateY(-50%);padding-left: 20px;">
+                                        <h3 class="text-dark">100 % <br> Fresh <br> Organic <br>Items</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5 mb-5">
+                                <div class="position-relative">
+                                    <img src="assets/banner-3.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <div class="position-absolute"
+                                        style="top: 50%;transform: translateY(-50%);padding-left: 20px;">
+                                        <h3 class="text-secondary">Goodness <br> Of <br> Nature's <br> Bounty </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5 mb-5">
+                                <div class="position-relative">
+                                    <img src="assets/banner-6.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <div class="position-absolute"
+                                        style="top: 50%; transform: translateY(-50%);padding-left: 20px;">
+                                        <h3 class="text-primary">Strong <br> Immune <br>Boosting <br> Properties..</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div *ngIf="paginatedOrders.length !=0" class="col-lg-9">
+                        <div class="row g-4 justify-content-center" *ngIf="!isLoading">
+                            <div *ngFor="let product of paginatedOrders" class="col-md-6 col-lg-6 col-xl-4">
+                                <div class="card h-100">
+                                    <a href=""
+                                        (click)="navigateToDetails($event,product.productId,product.price,product.selectedOption)">
+                                        <img [src]="'data:image/' + product.imageData + ';base64,' + product.imageData"
+                                            class="card-img-top" alt="no image">
+                                    </a>
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <div>
+                                            <h4>{{product.productName}}</h4>
+                                            <p>{{product.productDescription | summary}}</p>
+                                        </div>
+                                        <div class="text-center">
+                                            <p class="text-dark fs-5 fw-bold mb-3">
+                                                ₹ {{calculatePrice(product)}}
+                                            </p>
+                                            <p class="text-danger fs-5 fw-bold mb-3">{{product.isQuantityAvailable}}</p>
+                                            <div class="custom-dropdown">
+                                                <select [disabled]="product.isQuantityAvailable != null"
+                                                    class="bootstrap-select"
+                                                    (change)="onDropdownChange($event,product)">
+                                                    <option value="1" selected="selected">1 Kg</option>
+                                                    <option value="2">500 gm</option>
+                                                    <option value="3">250 gm</option>
+                                                </select>
+                                            </div>
+                                            <div *ngIf="!product.isAddedToCart" class="mt-3">
+                                                <button [disabled]="product.isQuantityAvailable != null"
+                                                    class="btn border border-secondary rounded-pill px-3 text-primary"
+                                                    (click)="addToCart(product)"><i
+                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
+                                                    cart</button>
+                                            </div>
+                                            <div *ngIf="product.isAddedToCart" class="mt-3">
+                                                <button [disabled]="product.isQuantityAvailable != null"
+                                                    class="btn border border-secondary rounded-pill px-3 text-primary"
+                                                    routerLink="/cart"><i
+                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Go to
+                                                    cart</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="paginatedOrders.length !=0 && !isLoading" class="col-12 d-flex justify-content-center">
+                            <div class="pagination mt-3">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto mt-2 mb-2"> <!-- Column for "Previous" button -->
+                                        <button class="btn btn-primary me-3" (click)="previousPage()"
+                                            [disabled]="currentPage === 1">Previous</button>
+                                        <span>Page {{ currentPage }} of {{ maxPages }}</span>
+                                        <button class="btn btn-primary ms-3" (click)="nextPage()"
+                                            [disabled]="currentPage === maxPages">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spinner-container justify-content-center align-items-center" *ngIf="isLoading">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="spinner-grow  spinner-border-md text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="spinner-grow spinner-border-md text-secondary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="spinner-grow spinner-border-md text-success" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="spinner-grow text-dark" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                    <div *ngIf="paginatedOrders.length == 0 && !isLoading" class="col-lg-9 text-center">
+                        <h1 class="text-primary">No Products Found</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Shop Component UI Code End-->

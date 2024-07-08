@@ -1,0 +1,24 @@
+<!--FAQ Component UI Code Start-->
+
+<div class="container-fluid main-header">
+  <h1 class="text-center text-dark display-6">FAQ</h1>
+  <div class="container faint-background">
+    <h1 class="text-center">Frequently Asked Questions</h1>
+    <div class="accordion p-3" id="accordionFlushExample">
+      <div class="accordion-item" *ngFor="let faq of faqs; let i = index">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" (click)="toggleCollapse(i)" type="button"
+            [attr.aria-expanded]="activeIndex === i ? 'true' : 'false'" [attr.aria-controls]="'flush-collapse-' + i">
+            <b>{{faq.question}}</b>
+          </button>
+        </h2>
+        <div [id]="'flush-collapse-' + i" class="accordion-collapse collapse" [ngClass]="{'show': activeIndex === i}"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">{{faq.answer}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--FAQ Component UI Code End-->

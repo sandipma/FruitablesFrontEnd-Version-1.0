@@ -1,0 +1,154 @@
+<!--Admin Order Details Component UI Code Start-->
+
+<div class="container-fluid main-header">
+    <h1 class="text-center text-dark display-6"><span style="background-color:#81c408">Order Details</span></h1>
+</div>
+
+<div class="container mt-3 shadow-bg box-container">
+    <div class="row mb-2">
+        <div class="col-lg-4 offset-lg-8">
+            <div class="text-center">
+                <h6 style="color:#b1122a;">Status</h6>
+                <select class="bootstrap-select status"
+                    [disabled]="this.selectedOption =='Cancelled' && this.isAllCancelled ===true"
+                    [(ngModel)]="selectedOption" (change)="onDropdownChange($event, this.orderId, userDetails.userId)">
+                    <option
+                        [disabled]=" this.selectedOption =='Confirmed'|| this.selectedOption =='Shipped' || this.selectedOption =='Out For Delivery' || this.selectedOption =='Delivered'"
+                        value="Placed">Placed</option>
+                    <option
+                        [disabled]="this.selectedOption =='Shipped' || this.selectedOption =='Out For Delivery' || this.selectedOption =='Delivered'"
+                        value="Confirmed">Confirmed</option>
+                    <option [disabled]="this.selectedOption =='Out For Delivery' || this.selectedOption =='Delivered'"
+                        value="Shipped">Shipped</option>
+                    <option [disabled]="this.selectedOption =='Delivered'" value="Out For Delivery">Out For Delivery
+                    </option>
+                    <option value="Delivered">Delivered</option>
+                    <option *ngIf="this.selectedOption =='Cancelled' && this.isAllCancelled === true"
+                        [disabled]="this.selectedOption =='Cancelled' && this.isAllCancelled === true"
+                        value="Cancelled">
+                        Cancelled
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 border-box">
+            <h3 class="text-center">User Details</h3>
+            <div class="details">
+                <div>
+                    <p>User Id : <span class="order-details">{{userDetails.userId}}</span></p>
+                </div>
+                <div>
+                    <p>User Name : <span class="order-details">{{userDetails.userName}}</span></p>
+                </div>
+                <div>
+                    <p>User Email : <span class="order-details">{{userDetails.userEmail}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 border-box">
+            <h3 class="text-center">Address Details</h3>
+            <div class="details">
+                <div>
+                    <p>First Name : <span class="order-details">{{addressDetails.firstName}}</span></p>
+                </div>
+                <div>
+                    <p>Last Name : <span class="order-details">{{addressDetails.lastName}}</span></p>
+                </div>
+                <div>
+                    <p>Street Address : <span class="order-details">{{addressDetails.streetAddress}}</span></p>
+                </div>
+                <div>
+                    <p>Postal Code : <span class="order-details">{{addressDetails.postalCode}}</span></p>
+                </div>
+                <div>
+                    <p>City : <span class="order-details">{{addressDetails.city}}</span></p>
+                </div>
+                <div>
+                    <p>State : <span class="order-details">{{addressDetails.state}}</span></p>
+                </div>
+                <div>
+                    <p>Country : <span class="order-details">{{addressDetails.country}}</span></p>
+                </div>
+                <div>
+                    <p>Phone Number : <span class="order-details">{{addressDetails.phoneNumber}}</span></p>
+                </div>
+                <div>
+                    <p>Email : <span class="order-details">{{addressDetails.addressEmail}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 border-box">
+            <h3 class="text-center">Order Details</h3>
+            <div *ngFor="let order of orderDetails" class="order-item">
+                <div class="col-lg-12">
+                    <p>Order Id : <span class="order-details">{{order.orderId}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Product Name : <span class="order-details">{{order.productName}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p><img [src]="'data:image;base64,' + order.productImage" class="img-fluid me-5 rounded-circle"
+                            style="width: 40px; height: 40px;" alt=""></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Price : <span class="order-details">{{order.price}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Quantity : <span class="order-details">{{order.quantity}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Sub Total : <span class="order-details">{{order.subTotal}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Total : <span class="order-details">{{order.total}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Receipt : <span class="order-details">{{order.receipt}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Order Details : <span class="order-details">{{order.orderDetails}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>RazorPay Order Id : <span class="order-details">{{order.razorPayOrderId}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Mode Of Payment : <span class="order-details">{{order.modeOfPayment}}</span></p>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 border-box">
+            <h3 class="text-center">Orders Status Details</h3>
+            <div *ngFor="let orderStatus of orderStatusDetails" class="order-item">
+                <div class="col-lg-12">
+                    <p>Order Status Id : <span class="order-details">{{orderStatus.orderStatusId}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Order Status Details : <span class="order-details">{{orderStatus.orderStatusDetails}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Updated By Admin Id : <span class="order-details">{{orderStatus.updateByAdminId}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Order Placed At : <span class="order-details">{{orderStatus.created_at | date:'dd-MM-yyyy h:mm:ss
+                            a'}}</span></p>
+                </div>
+                <div class="col-lg-12">
+                    <p>Order Status Updated At : <span class="order-details">{{orderStatus.updated_at | date:'dd-MM-yyyy
+                            h:mm:ss a'}}</span></p>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Admin Order Details Component UI Code End-->

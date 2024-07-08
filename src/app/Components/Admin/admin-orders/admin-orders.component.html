@@ -1,0 +1,112 @@
+<!--Admin Order Component UI Code Start-->
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="container order-header">
+      <h1 class="text-center text-dark display-6"><span class="orders-header">Order Details</span></h1>
+    </div>
+    <section>
+      <div class="container">
+        <div class="row justify-content-center align-items-center h-100 gradient-custom">
+          <div class="card border-0 rounded-3">
+            <div class="card-body p-4">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <div class="input-group mb-4">
+                      <input type="search" [disabled]="this.adminOrders.length == 0"
+                        class="form-control form-control-sm" placeholder="Search" aria-label="Search"
+                        aria-describedby="search-addon" />
+                      <button type="button" class="btn btn-primary">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="spinner-container d-flex justify-content-center align-items-center" *ngIf="isLoading">
+                <div class="row">
+                  <div class="col">
+                    <div class="spinner-grow  spinner-border-md text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="spinner-grow spinner-border-md text-secondary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="spinner-grow spinner-border-md text-success" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="spinner-grow text-dark" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card shadow-0 border mb-4">
+                <h5 *ngIf="this.adminOrders.length != 0 && !isLoading" class="text-center text-primary mt-3">Check Your
+                  Orders Here !!!!</h5>
+                <ng-container *ngFor="let group of groupByOrderId(paginatedOrders)">
+                  <div class="card-body">
+                    <div class="row" *ngFor="let order of group.orders">
+                      <div class="col-lg-2 text-center mt-5">
+                        <p class="text-muted mb-0">OrderId : {{order.orderId}}</p>
+                      </div>
+                      <div class="col-lg-2 mt-4">
+                        <div class="d-flex justify-content-center align-items-center">
+                          <img [src]="'data:image;base64,' + order.productImage"
+                            class="img-fluid me-5 ms-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                        </div>
+                      </div>
+                      <div class="col-lg-2 text-center mt-5">
+                        <p class="text-muted mb-0">{{order.productName}}</p>
+                      </div>
+                      <div class="col-lg-2 text-center mt-5">
+                        <p class="text-muted mb-0">{{order.userName}}</p>
+                      </div>
+                      <div class="col-lg-2 text-center mt-5">
+                        <p class="text-muted mb-0">Qty : {{order.quantity}}</p>
+                      </div>
+                      <div class="col-lg-2 text-center mt-5">
+                        <p class="text-muted mb-0">₹ {{order.price}}</p>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-lg-2 offset-lg-8 mt-2">
+                        <div class="text-center">
+                          <button class="btn btn-primary" (click)="seeDetails(group.orders[0].orderId)">View
+                            Details</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr *ngIf="!isLastGroup(group, adminOrders)" class="mb-0">
+                </ng-container>
+              </div>
+              <div *ngIf="this.adminOrders.length == 0 && !isLoading" class="container">
+                <div class="row">
+                  <div class="col">
+                    <h3 class="text-center text-primary">No Orders Found..</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mt-3">
+        <div class="row justify-content-end">
+          <div class="col-auto">
+            <button *ngIf="!isLoading" routerLink="/admin-portal" class="btn background"> <i class="fas fa-arrow-left"></i> back to
+              dashboard</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!--Admin Order Component UI Code End-->

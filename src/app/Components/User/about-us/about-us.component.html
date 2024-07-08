@@ -1,0 +1,92 @@
+<!--About Us Component UI Code Start-->
+
+<div class="container-fluid main-header">
+    <h1 class="text-center text-primary display-6 mb-2">About Us...</h1>
+    <div class="container ">
+        <div class="row">
+            <div class="col">
+                <div class="aboutus">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="row mt-5">
+                                    <h1 class="text-dark"><b>Fresh & Natural</b></h1>
+                                </div>
+                                <div class="row">
+                                    <h1 class="text-dark"><b>Farm Food</b></h1>
+                                </div>
+                                <div class="row">
+                                    <p class="text-dark"><b>At Fruitables, we are passionate about bringing fresh,
+                                            high-quality fruits
+                                            and vegetables to your table.</b></p>
+
+                                    <p class="text-dark"><b>
+                                            Our mission is to promote healthy living and support local farmers by
+                                            providing a wide
+                                            selection of farm-fresh produce to our customers.
+                                        </b></p>
+                                    <p class="text-dark"><b>
+
+                                            Our journey began with a simple idea: to create a convenient and accessible
+                                            platform where
+                                            people can find the freshest fruits and vegetables while supporting
+                                            sustainable farming
+                                            practices.
+                                            With this vision in mind, we have curated a diverse range of seasonal
+                                            produce, sourced
+                                            directly
+                                            from local farms and growers who share our commitment to quality and
+                                            sustainability.</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="bg-light p-5 rounded">
+            <div *ngIf="overAllReview !== null" class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>satisfied customers</h4>
+                        <h1>{{overAllReview.userCount}}</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>quality of service</h4>
+                        <h1>100%</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>quality certificates</h4>
+                        <h1>{{overAllReview.numberOfRating}}</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>Available Products</h4>
+                        <h1>{{overAllReview.availableProducts}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="overAllReview == null" class="row justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="text-primary text-center">No Review Available...</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--About Us Component UI Code End-->

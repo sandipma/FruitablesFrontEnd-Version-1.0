@@ -1,0 +1,29 @@
+/* Home Component CSS Code Start */
+
+.bg-all {
+    background-color: #dc8138 !important;
+}
+
+.bg-vegetables {
+    background-color: #81c408 !important;
+}
+
+.bg-fruits {
+    background-color: #f63838 !important;
+}
+
+.custom-dropdown select {
+    background-color: #81c408;
+
+}
+
+.overflow-description {
+    word-wrap: break-word;
+}
+
+.small-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Home Component CSS Code End */

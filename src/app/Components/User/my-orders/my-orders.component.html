@@ -1,0 +1,137 @@
+<!--My Orders Component UI Code Start-->
+
+<div class="container order-header">
+  <h1 class="text-center text-dark display-6"><span class="orders-header">Order Details</span></h1>
+</div>
+
+<section>
+  <div class="container">
+    <div class="row justify-content-center align-items-center h-100 gradient-custom">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card border-0 rounded-3">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Hey there, <span class="text-custom">{{currentUserName}}</span> !! Check out
+              your orders below</h5>
+          </div>
+          <div class="card-body p-4">
+            <div *ngIf="orders.length != 0" class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <div class="input-group mb-4">
+                    <input type="search" [(ngModel)]="searchOrderName" class="form-control form-control-sm"
+                      placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" (click)="onSearch(searchOrderName)" class="btn btn-primary">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngFor="let order of paginatedOrders" class="card shadow-0 border mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <img [src]="'data:image;base64,' + order.productImage" class="img-fluid me-5 ms-5 rounded-circle"
+                        style="width: 80px; height: 80px;" alt="">
+                    </div>
+                  </div>
+                  <div class="col-md-2 text-center mt-4">
+                    <p class="text-muted mb-0">{{order.productName}}</p>
+                  </div>
+                  <div class="col-md-2 text-center mt-4">
+                    <p class="text-muted mb-0 small"> OrderId : {{order.orderId}}</p>
+                  </div>
+                  <div class="col-md-2 text-center mt-4">
+                    <p class="text-muted mb-0 small">Total Price : {{order.price}}</p>
+                  </div>
+                  <div class="col-md-2 text-center mt-4">
+                    <p class="text-muted mb-0 small">{{order.modeOfPayment}}</p>
+                  </div>
+                  <div class="col-md-2 text-center mt-4">
+                    <p class="text-muted mb-0 small"> Rec : {{order.receipt}}</p>
+                  </div>
+                </div>
+                <hr class="mb-0">
+                <div class="row">
+                  <div *ngIf="order.orderStatus == 'Placed'" class="col-md-10">
+                    <div class="status-container">
+                      <i class="bi bi-dot custom-dot-placed"></i>
+                      <p class="text-muted mb-0 small">Order Status : {{order.orderStatus}}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="order.orderStatus == 'Confirmed'" class="col-md-10">
+                    <div class="status-container">
+                      <i class="bi bi-dot custom-dot-confirmed"></i>
+                      <p class="text-muted mb-0 small">Order Status : {{order.orderStatus}}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="order.orderStatus == 'Shipped'" class="col-md-10">
+                    <div class="status-container">
+                      <i class="bi bi-dot custom-dot-shipped"></i>
+                      <p class="text-muted mb-0 small">Order Status : {{order.orderStatus}}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="order.orderStatus == 'Out For Delivery'" class="col-md-10">
+                    <div class="status-container">
+                      <i class="bi bi-dot custom-dot-out-for-delivery"></i>
+                      <p class="text-muted mb-0 small">Order Status : {{order.orderStatus}}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="order.orderStatus == 'Delivered'" class="col-md-10">
+                    <div class="status-container">
+                      <i class="bi bi-dot custom-dot-delivered"></i>
+                      <p class="text-muted mb-0 small">Order Status : {{order.orderStatus}}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="order.orderStatus == 'Cancelled'" class="col-md-10">
+                    <div class="status-container">
+                      <i class="bi bi-dot custom-dot-cancelled"></i>
+                      <p class="text-muted mb-0 small">Order Status : {{order.orderStatus}}</p>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="order.modeOfPayment == 'Cash-On-Delivery' && (order.orderStatus == 'Placed' || order.orderStatus == 'Confirmed')"
+                    class="col-md-2 mb-2">
+                    <a href="" (click)="updateOrderStatus(order.productName, 'Cancelled', $event)"
+                      class="cancel-order">Cancel Order</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-10">
+                    <div class="status-container">
+                      <p class="text-muted mb-0 small">Placed At : {{ order.created_at | date:'dd-MM-yyyy h:mm:ss a' }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="order.orderStatus == 'Delivered'" class="row">
+                  <div class="col-md-10">
+                    <div class="status-container">
+                      <button class="bg-orders" (click)="rateProduct(order.productName)">Rate Product</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="orders.length == 0" class="container">
+              <div class="row">
+                <div class="col">
+                  <h3 class="text-center text-primary">No Orders Found..</h3>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="orders.length != 0" class="d-flex justify-content-between mt-4">
+              <button class="btn btn-primary" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+              <span>Page {{ currentPage }}</span>
+              <button class="btn btn-primary" (click)="nextPage()"
+                [disabled]="(currentPage * ordersPerPage) >= filteredOrders.length || (currentPage === 1 && filteredOrders.length <= ordersPerPage)">
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--My Orders Component UI Code End-->

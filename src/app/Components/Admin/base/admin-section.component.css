@@ -1,0 +1,14 @@
+/* Admin Section Component CSS Code Start */
+
+.btn-outline-secondary {
+    color: #ffb524;
+    border-color: #ffb524;
+}
+
+.btn-outline-secondary:hover {
+    color: #000;
+    background-color: #ffb524;
+    border-color: #ffb524;
+}
+
+/* Admin Section Component CSS Code End */

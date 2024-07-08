@@ -1,0 +1,13 @@
+/* Not found Component CSS Code Start */
+
+.page-header-404
+{
+    margin-top: 0px !important;
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/assets/cart-page-header-img.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Not found Component CSS Code End */

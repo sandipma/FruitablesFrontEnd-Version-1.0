@@ -1,0 +1,141 @@
+<!--Add Product Component UI Code Starts-->
+
+<div class="container addproduct-header">
+  <h1 class="text-center text-dark display-6"><span class="addproducts-header">Add Product</span></h1>
+</div>
+
+<div class="container">
+  <section class="h-100">
+    <div class="container h-100">
+      <div class="row justify-content-center align-items-center h-100 mt-5">
+        <div class="col-12 col-md-6">
+          <div class="card rounded-3">
+            <img src="assets/29854.jpg" class="card-img-top w-100"
+              style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+            <div class="card-body d-flex flex-column align-items-center">
+              <h3 class="text-center mb-4">Product Details.....</h3>
+              <div class="spinner-container d-flex justify-content-center align-items-center" *ngIf="isLoading">
+                <div class="row">
+                  <div class="col">
+                    <div class="spinner-grow  spinner-border-md text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="spinner-grow spinner-border-md text-secondary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="spinner-grow spinner-border-md text-success" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="spinner-grow text-dark" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <form *ngIf="!isLoading" [formGroup]="productForm" class="w-75" (ngSubmit)="onSubmit()"
+                enctype="multipart/form-data" novalidate autocomplete="off">
+                <div class="form-group mt-3">
+                  <select id="categoryId" formControlName="CategoryId"
+                    class="form-control form-control-lg category-dropdown"
+                    [ngClass]="{ 'is-invalid': (  f['CategoryId']?.dirty) && f['CategoryId']?.errors, 'is-valid':  f['CategoryId']?.valid }"
+                    required>
+                    <option [value]="null" disabled [selected]="true">Select Category</option>
+                    <option *ngFor="let category of categoryList" [value]="category.categoryId">{{ category.categoryName
+                      }}</option>
+                  </select>
+                  <div *ngIf=" f['CategoryId']?.dirty && f['CategoryId']?.errors" class="invalid-feedback">
+                    <div *ngIf="f['CategoryId']?.errors['required']">Category is required! </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="text" formControlName="ProductName" id="ProductName" class="form-control form-control-lg"
+                    placeholder="Product Name"
+                    [ngClass]="{ 'is-invalid': ( f['ProductName']?.dirty) && f['ProductName']?.errors, 'is-valid':  f['ProductName']?.valid }"
+                    required>
+                  <div *ngIf="f['ProductName']?.dirty && f['ProductName']?.errors" class="invalid-feedback">
+                    <div *ngIf="f['ProductName']?.errors['required']">Product Name is required! </div>
+                    <div *ngIf="f['ProductName']?.errors['maxlength']">ProductName must be at most 255 characters long!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <textarea formControlName="ProductDescription" id="ProductDescription"
+                    class="form-control form-control-lg" placeholder="Product Description"
+                    [ngClass]="{ 'is-invalid': ( f['ProductDescription']?.dirty) && f['ProductDescription']?.errors, 'is-valid':  f['ProductDescription']?.valid }"
+                    required></textarea>
+                  <div *ngIf="f['ProductDescription']?.dirty && f['ProductDescription']?.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="f['ProductDescription']?.errors['required']">Product description is required! </div>
+                    <div *ngIf="f['ProductDescription']?.errors['minlength']">Product description must be at least 150
+                      characters long! </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="number" formControlName="Price" id="Price" class="form-control form-control-lg"
+                    placeholder="Price"
+                    [ngClass]="{ 'is-invalid': ( f['Price']?.dirty) && f['Price']?.errors, 'is-valid':  f['Price']?.valid }"
+                    required>
+                  <div *ngIf=" f['Price']?.dirty && f['Price']?.errors" class="invalid-feedback">
+                    <div *ngIf="f['Price']?.errors['required']">Price is required! </div>
+                    <div *ngIf="f['Price']?.errors['invalidNumber']">Price must be a valid number! </div>
+                    <div *ngIf="f['Price']?.errors['invalidRange']">Price must be between 1 and 999999! </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="number" formControlName="StockQuantity" id="StockQuantity"
+                    class="form-control form-control-lg" placeholder="Stock Quantity"
+                    [ngClass]="{ 'is-invalid': ( f['StockQuantity']?.dirty) && f['StockQuantity']?.errors, 'is-valid':  f['StockQuantity']?.valid }"
+                    required>
+                  <div *ngIf=" f['StockQuantity']?.dirty && f['StockQuantity']?.errors" class="invalid-feedback">
+                    <div *ngIf="f['StockQuantity']?.errors['required']">Stock Quantity is required! </div>
+                    <div *ngIf="f['StockQuantity']?.errors['invalidRange']">Stock Quantity must be between 1 and 10000!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <div>{{ fileName }}</div>
+                  <label *ngIf="isAddOrUpdate ==='Add'" for="fileInput" class="fileLabel btn btn-primary mt-2">Upload
+                    Image</label>
+                  <label *ngIf="isAddOrUpdate ==='Update'" for="fileInput" class="fileLabel btn btn-primary mt-2">Update
+                    Image</label>
+                  <input type="file" formControlName="ImageUpload" (change)="onFileSelected($event)" id="fileInput"
+                    class="fileInput">
+                  <div style="color: red;">{{fileUploadErrorMessage}}</div>
+                </div>
+                <div class="form-group mt-3 text-center">
+                  <button type="submit" class="btn btn-primary btn-lg px-3 pointer-cursor"
+                    [disabled]="isWorking || !productForm.valid || !isImageValid">
+                    <div *ngIf="isAddOrUpdate ==='Add'">
+                      <i [attr.class]="isWorking ? 'bi-hourglass-split' : 'bi-check2-square'"></i> {{
+                      isWorking ? 'Working on it...' : 'Submit'}}
+                    </div>
+                    <div *ngIf="isAddOrUpdate ==='Update'">
+                      <i [attr.class]="isWorking ? 'bi-hourglass-split' : 'bi-check2-square'"></i> {{
+                      isWorking ? 'Working on it...' : 'Update' }}
+                    </div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div  *ngIf="!isLoading"  class="container mt-3">
+      <div class="row justify-content-end">
+        <div class="col-auto">
+          <button routerLink="/admin-portal" class="btn background"> <i class="fas fa-arrow-left"></i> back to
+            dashboard</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!--Add Product Component UI Code End-->

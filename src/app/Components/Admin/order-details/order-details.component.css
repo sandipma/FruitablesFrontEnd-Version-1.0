@@ -1,0 +1,45 @@
+/* Admin Order Details Component CSS Code Start */
+
+p {
+    color: rgb(1, 13, 2);
+}
+
+.shadow-bg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
+
+.box-container {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.border-box {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+}
+
+.order-details {
+    font-weight: bold;
+    color: #b1122a;
+}
+
+.order-item {
+    margin-bottom: 10px;
+}
+
+hr {
+    border-top: 1px solid #dee2e6;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.status {
+    background-color: #81c408 !important;
+}
+
+.details {
+    padding-left: 10px;
+}
+
+/* Admin Order Details Component CSS Code End */

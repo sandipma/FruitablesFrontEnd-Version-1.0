@@ -1,0 +1,22 @@
+/* User Section Component CSS Code Start */
+
+.btn-outline-secondary {
+    color: #ffb524;
+    border-color: #ffb524;
+}
+
+.btn-outline-secondary:hover {
+    color: #000;
+    background-color: #ffb524;
+    border-color: #ffb524;
+}
+
+.bg-fruits {
+    background-color: #f63838 !important;
+}
+
+.bg-orders {
+    background-color: #ffb524 !important;
+}
+
+/* User Section Component CSS Code End */

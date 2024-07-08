@@ -1,0 +1,28 @@
+<!--Admin Home Component UI Code Starts-->
+
+<div class="container admin-home-header">
+    <h1 class="text-center text-dark display-6"><span class="admin-homes-header">Admin Home</span></h1>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <h1 *ngIf="!userService.isAdminTokenExists() && !userService.isAdminRefreshTokenExists()" class="text-center">
+            Welcome to admin dashboard kindly login to continue....</h1>
+        <h1 *ngIf="userService.isAdminTokenExists() || userService.isAdminRefreshTokenExists()" class="text-center">
+            Welcome to admin dashboard....</h1>
+        <div class="button-container">
+            <button *ngIf="userService.isAdminTokenExists() || userService.isAdminRefreshTokenExists()"
+                class="btn-primary" routerLink="/admin-portal/add-product">Add New Product</button>
+            <button *ngIf="userService.isAdminTokenExists() || userService.isAdminRefreshTokenExists()"
+                class="btn-primary" routerLink="/admin-portal/product-list">See Available Products</button>
+            <button *ngIf="userService.isAdminTokenExists() || userService.isAdminRefreshTokenExists()"
+                class="btn-primary" routerLink="/admin-portal/add-category">Add New Category</button>
+            <button *ngIf="userService.isAdminTokenExists() || userService.isAdminRefreshTokenExists()"
+                class="btn-primary" routerLink="/admin-portal/category-list">See Available Category</button>
+            <button *ngIf="userService.isAdminTokenExists() || userService.isAdminRefreshTokenExists()"
+                class="btn-primary" routerLink="/admin-portal/admin-orders">See All Orders</button>
+        </div>
+    </div>
+</div>
+
+<!--Admin Home Component UI Code End-->

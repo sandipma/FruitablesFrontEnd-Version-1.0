@@ -1,0 +1,153 @@
+<!--Cart Component UI Code Start-->
+
+<div class="container cart-header">
+    <h1 class="text-center text-dark display-6"><span class="carts-header">Cart Details</span></h1>
+</div>
+
+<div *ngIf="this.cartService.currentCartDetails.length !== 0" class="container-fluid mt-3">
+    <div class="spinner-container d-flex justify-content-center align-items-center" *ngIf="isLoading">
+        <div class="row">
+            <div class="col">
+                <div class="spinner-grow  spinner-border-md text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="spinner-grow spinner-border-md text-secondary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="spinner-grow spinner-border-md text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="spinner-grow text-dark" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="!isLoading">
+        <div class="row">
+            <hr>
+        </div>
+        <div class="row" *ngFor="let item of this.cartService.currentCartDetails">
+            <div class="col-lg-3">
+                <div class="d-inline">
+                    <div class="d-flex align-items-center">
+                        <img [src]="'data:image;base64,' + item.productImage" class="img-fluid me-5 rounded-circle"
+                            style="width: 80px; height: 80px;" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="d-inline">
+                    <div class="mt-4">
+                        {{item.productName}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="d-inline">
+                    <div class="mt-4">
+                        ₹ {{item.price | number:'1.2-2'}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="d-inline">
+                    <div class="input-group quantity mt-3" style="width: 100px;">
+                        <div class="input-group-btn">
+                            <button [disabled]="item.quantity === 1"
+                                (click)="decreaseCartDetails(item,this.cartService.currentPriceDetails)"
+                                class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control form-control-sm text-center border-0"
+                            value={{item.quantity}}>
+                        <div class="input-group-btn">
+                            <button (click)="increaseCartDetails(item,this.cartService.currentPriceDetails)"
+                                class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="d-inline">
+                    <button data-bs-toggle="modal" [attr.data-bs-target]="'#deleteModal-' + item.cartId"
+                        class="btn btn-md rounded-circle bg-light border mt-3">
+                        <i class="fa fa-times text-danger"></i>
+                    </button>
+                    <div class="modal fade" [id]="'deleteModal-' + item.cartId" tabindex="-1"
+                        aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="color: blue">
+                                    Are you sure you want to delete this cart item?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" data-bs-dismiss="modal" (click)="deleteCartItem(item.cartId)"
+                                        class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+        </div>
+        <div class="row g-4 justify-content-end">
+            <div class="col-8"></div>
+            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                <div class="bg-light rounded">
+                    <div class="p-4">
+                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                        <div class="d-flex justify-content-between mb-4">
+                            <h5 class="mb-0 me-4">Subtotal:</h5>
+                            <p class="mb-0">₹ {{this.cartService.currentPriceDetails.subTotal | number:'1.2-2'}}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-0 me-4">Shipping</h5>
+                            <div class="">
+                                <p class="mb-0">Flat rate: 10 %</p>
+                            </div>
+                        </div>
+                        <p class="mb-0 text-end">Shipping to India.</p>
+                        <p class="mb-0 text-end">₹ {{this.cartService.currentPriceDetails.charges | number:'1.2-2'}}</p>
+                    </div>
+                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                        <h5 class="mb-0 ps-4 me-4">Total</h5>
+                        <p class="mb-0 pe-4">₹ {{this.cartService.currentPriceDetails.total | number:'1.2-2'}}</p>
+                    </div>
+                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+                        routerLink="/checkout" type="button">Proceed Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.cartService.currentCartDetails.length === 0" class="container-fluid py-5">
+    <div class="container py-5">
+        <h1 class="text-center">Your cart is empty !!</h1>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 text-center">
+                <button class="btn btn-primary btn-lg" routerLink="/shop">Shop Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Cart Component UI Code End-->
